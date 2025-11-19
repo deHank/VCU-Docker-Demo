@@ -1,0 +1,9 @@
+    version: '3.8'
+    services:
+      app:
+        build: .
+        network_mode: host
+        volumes:
+          - .:/usr/src/app
+          - /usr/src/app/node_modules # This creates a named volume for node_modules
+        command: npm run start

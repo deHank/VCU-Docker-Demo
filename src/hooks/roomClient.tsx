@@ -551,7 +551,7 @@ async getConsumeStream(producerId: string): Promise<ConsumeStreamResult> {
           video: {
             width: { min: 640, ideal: 1920 },
             height: { min: 400, ideal: 1080 },
-            // deviceId: deviceId || undefined
+            deviceId: deviceId || undefined
           }
         };
         break;

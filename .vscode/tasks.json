@@ -5,18 +5,18 @@
         {
             "label": "npm: build (development)",
             "type": "shell",
-            "command": "npm run build", // This calls the unified 'build' script
+            "command": "npm run build",
             "options": {
                 "env": {
-                    "NODE_ENV": "development" // Set NODE_ENV for this task
+                    "NODE_ENV": "development"
                 }
             },
             "group": {
                 "kind": "build",
-                "isDefault": true // Make this the default build task
+                "isDefault": true
             },
             "presentation": {
-                "reveal": "silent", // Don't always show the terminal
+                "reveal": "silent",
                 "clear": true
             },
             "problemMatcher": []
@@ -24,10 +24,10 @@
         {
             "label": "npm: build (production)",
             "type": "shell",
-            "command": "npm run build", // This calls the unified 'build' script
+            "command": "npm run build",
             "options": {
                 "env": {
-                    "NODE_ENV": "production" // Set NODE_ENV for this task
+                    "NODE_ENV": "production"
                 }
             },
             "group": "build",
@@ -36,6 +36,40 @@
                 "clear": true
             },
             "problemMatcher": []
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build",
+            "platform": "node",
+            "dockerBuild": {
+                "dockerfile": "${workspaceFolder}/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: release",
+            "dependsOn": [
+                "docker-build"
+            ],
+            "platform": "node"
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build"
+            ],
+            "dockerRun": {
+                "env": {
+                    "DEBUG": "*",
+                    "NODE_ENV": "development"
+                }
+            },
+            "node": {
+                "enableDebugging": true
+            }
         }
     ]
 }

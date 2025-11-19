@@ -227,7 +227,7 @@ export function usePeerConnection() {
     setActiveView('activeCall');
     console.log('Produce was called');
     if(rcRef.current){
-      rcRef.current.produce('videoType')
+      rcRef.current.produce(RoomClient.mediaType.video)
       
     }
   }
